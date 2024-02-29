@@ -4,9 +4,23 @@ import { AppService } from './app.service';
 import { InvestmentModule } from './investment/investment.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmConfigService } from './config/typeorm.config.service';
 
 @Module({
-  imports: [InvestmentModule, UserModule, AuthModule],
+  imports: [
+    InvestmentModule,
+    UserModule,
+    AuthModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
