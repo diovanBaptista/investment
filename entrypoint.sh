@@ -1,4 +1,8 @@
-npx typeorm-ts-node-commonjs migration:show -d src/database/data-source-cli.ts
+npm run typeorm migration:show
+
+npm run typeorm migration:run
+
+# comando para fazer a migration
 
 npm run test
 
