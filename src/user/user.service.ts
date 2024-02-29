@@ -13,7 +13,8 @@ export class UserService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    const newUser = this.userRepository.create(createUserDto);
+    return this.userRepository.save(newUser);
   }
 
   findAll() {
@@ -22,15 +23,15 @@ export class UserService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOneByUsername(username: string) {
+    return this.userRepository.findOne({
+      where: [{ username }],
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  findOne(id: string) {
+    return this.userRepository.findOne({
+      where: [{ id }],
+    });
   }
 }
