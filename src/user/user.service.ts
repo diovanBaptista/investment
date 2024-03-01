@@ -22,9 +22,15 @@ export class UserService {
     });
   }
 
-  findOne(username: string) {
+  findOneByUsername(username: string) {
     return this.userRepository.findOne({
       where: [{ username: username }, { email: username }],
+    });
+  }
+
+  findOne(id: string) {
+    return this.userRepository.findOne({
+      where: [{ id }],
     });
   }
 }
