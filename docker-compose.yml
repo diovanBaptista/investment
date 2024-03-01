@@ -4,7 +4,7 @@ services:
   nest-app:
     build: .
     ports:
-      - 3000:3000
+      - "3000:3000"
     networks:
       - app-network
     volumes:
@@ -44,6 +44,8 @@ services:
       - "8080:8080"
     networks:
       - app-network
+    depends_on:
+      - database
       
 networks:
   app-network:
