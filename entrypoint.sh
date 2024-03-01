@@ -6,4 +6,4 @@ npm run typeorm migration:run
 
 npm run test
 
-npm run start
+npm run start:dev
