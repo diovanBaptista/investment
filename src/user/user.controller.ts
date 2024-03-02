@@ -10,13 +10,12 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Creation new user request' })
+  @ApiOperation({ summary: 'Creation new user' })
   @ApiBody({ type: CreateUserDto })
   async create(
     @Body() createUserDto: CreateUserDto,
     @Body('password', HashPasswordPipe) passwordHashed: string,
   ) {
-    console.log(passwordHashed);
     const userCreated = await this.userService.create({
       ...createUserDto,
       password: passwordHashed,

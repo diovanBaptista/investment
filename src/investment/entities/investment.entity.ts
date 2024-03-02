@@ -13,9 +13,6 @@ export class Investment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  username: string;
-
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   value: number;
 
