@@ -4,7 +4,6 @@ import { UpdateInvestmentDto } from './dto/update-investment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Investment } from './entities/investment.entity';
 import { Repository } from 'typeorm';
-import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class InvestmentService {
@@ -31,8 +30,10 @@ export class InvestmentService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} investment`;
+  findOne(id: string) {
+    return this.investmentRepository.findOne({
+      where: { id },
+    });
   }
 
   update(id: number, updateInvestmentDto: UpdateInvestmentDto) {

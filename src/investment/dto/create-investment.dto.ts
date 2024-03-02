@@ -26,7 +26,6 @@ export class CreateInvestmentDto {
   @Validate(DateNowOrPastValidator)
   @ApiProperty({
     description: 'The creation date of the entity',
-    example: '2024-03-01T12:00:00Z',
     type: Date,
   })
   created_at: Date;

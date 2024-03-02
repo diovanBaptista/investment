@@ -9,6 +9,7 @@ import {
   Query,
   UseGuards,
   Req,
+  NotFoundException,
 } from '@nestjs/common';
 import { InvestmentService } from './investment.service';
 import { CreateInvestmentDto } from './dto/create-investment.dto';
@@ -22,6 +23,7 @@ import {
 } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { AuthService } from 'src/auth/auth.service';
+import { differenceInMonths } from 'date-fns';
 
 @Controller('investment')
 @ApiTags('investment')
@@ -79,8 +81,33 @@ export class InvestmentController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get investment by ID' })
-  findOne(@Param('id') id: string) {
-    return this.investmentService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    try {
+      const investment = await this.investmentService.findOne(id);
+
+      if (!investment) {
+        throw new NotFoundException('Investment not found');
+      }
+
+      const currentDate = new Date();
+      const createdAtDate = new Date(investment.created_at);
+
+      const monthsPassed = differenceInMonths(currentDate, createdAtDate);
+
+      const gainPercentage = 0.052;
+      const gainPerMounth = monthsPassed * gainPercentage * investment.value;
+      const expectedValue = Number(
+        (gainPerMounth + Number(investment.value)).toFixed(2),
+      );
+
+      const payload = {
+        ...investment,
+        expected_value: expectedValue,
+      };
+      return payload;
+    } catch (error) {
+      throw error; // Rejogue a exceção para ser tratada globalmente ou retorne uma resposta de erro adequada
+    }
   }
 
   @Patch(':id')
