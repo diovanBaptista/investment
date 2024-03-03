@@ -19,6 +19,12 @@ export class Investment {
   @ManyToOne(() => User, (user) => user.investments)
   user: User;
 
+  @Column({ default: false })
+  withdraw: boolean;
+
+  @Column({ nullable: true })
+  withdraw_at: Date;
+
   @CreateDateColumn()
   created_at: Date;
 

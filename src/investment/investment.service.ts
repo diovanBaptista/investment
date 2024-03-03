@@ -36,8 +36,8 @@ export class InvestmentService {
     });
   }
 
-  update(id: number, updateInvestmentDto: UpdateInvestmentDto) {
-    return `This action updates a #${id} investment`;
+  update(id: string, updateInvestmentDto: UpdateInvestmentDto) {
+    return this.investmentRepository.update(id, updateInvestmentDto);
   }
 
   remove(id: number) {

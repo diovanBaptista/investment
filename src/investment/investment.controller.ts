@@ -10,6 +10,7 @@ import {
   UseGuards,
   Req,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { InvestmentService } from './investment.service';
 import { CreateInvestmentDto } from './dto/create-investment.dto';
@@ -36,9 +37,7 @@ export class InvestmentController {
   ) {}
 
   @Post()
-  @ApiOperation({
-    summary: 'Create new investment',
-  })
+  @ApiOperation({ summary: 'Create new investment' })
   @ApiBody({ type: CreateInvestmentDto })
   create(
     @Body() createInvestmentDto: CreateInvestmentDto,
@@ -74,8 +73,10 @@ export class InvestmentController {
     @Query('limit') limit: number = 10,
     @Req() request: Request,
   ) {
+    // the user can see their investments
     const authorizationHeader = request.headers['authorization'];
     const getUserId = this.authService.getUserIdFromToken(authorizationHeader);
+
     return this.investmentService.findAll({ page, limit }, getUserId);
   }
 
@@ -96,6 +97,7 @@ export class InvestmentController {
 
       const gainPercentage = 0.052;
       const gainPerMounth = monthsPassed * gainPercentage * investment.value;
+
       const expectedValue = Number(
         (gainPerMounth + Number(investment.value)).toFixed(2),
       );
@@ -106,17 +108,44 @@ export class InvestmentController {
       };
       return payload;
     } catch (error) {
-      throw error; // Rejogue a exceção para ser tratada globalmente ou retorne uma resposta de erro adequada
+      throw error;
     }
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update investment by ID' })
-  update(
+  @ApiOperation({ summary: 'Update investment and withdraw by ID' })
+  async update(
     @Param('id') id: string,
     @Body() updateInvestmentDto: UpdateInvestmentDto,
   ) {
-    return this.investmentService.update(+id, updateInvestmentDto);
+    try {
+      const investment = await this.investmentService.findOne(id);
+
+      if (!investment) {
+        throw new NotFoundException('Investment not found');
+      }
+
+      if (investment.withdraw && updateInvestmentDto.withdraw) {
+        // the investment can only be withdrawn once
+        throw new BadRequestException('Investment already withdrawn');
+      }
+
+      const withdrawAtDate = new Date(updateInvestmentDto.withdraw_at);
+      const createdAtDate = new Date(investment.created_at);
+      const dateNow = new Date();
+
+      if (
+        withdrawAtDate.getTime() <= createdAtDate.getTime() ||
+        withdrawAtDate.getTime() >= dateNow.getTime()
+      ) {
+        throw new BadRequestException(
+          'The investment cannot be withdrawn on that date',
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+    return this.investmentService.update(id, updateInvestmentDto);
   }
 
   @Delete(':id')
