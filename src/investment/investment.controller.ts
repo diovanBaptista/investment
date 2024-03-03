@@ -151,7 +151,10 @@ export class InvestmentController {
         throw new NotFoundException('Investment not found');
       }
 
-      if (investment.withdraw && updateInvestmentDto.withdraw) {
+      if (
+        (investment.withdraw && updateInvestmentDto.withdraw) ||
+        investment.withdraw_at
+      ) {
         // the investment can only be withdrawn once
         throw new BadRequestException('Investment already withdrawn');
       }
