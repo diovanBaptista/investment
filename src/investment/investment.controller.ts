@@ -93,19 +93,45 @@ export class InvestmentController {
       const currentDate = new Date();
       const createdAtDate = new Date(investment.created_at);
 
+      // calculate difference between mouths
       const monthsPassed = differenceInMonths(currentDate, createdAtDate);
 
-      const gainPercentage = 0.052;
-      const gainPerMounth = monthsPassed * gainPercentage * investment.value;
+      const gainPercentage = 0.0052;
+      const gainPerMounth = gainPercentage * investment.value;
 
       const expectedValue = Number(
-        (gainPerMounth + Number(investment.value)).toFixed(2),
+        (gainPerMounth * monthsPassed + Number(investment.value)).toFixed(2),
       );
 
       const payload = {
         ...investment,
         expected_value: expectedValue,
       };
+
+      // calculation withdraw tax
+      if (investment.withdraw) {
+        let tax = 0;
+
+        /**
+         * Discount value example
+         * investment = 1000
+         * expectedValue = 1200
+         * discountValue == 200
+         * the discount will be applied to the amount generated
+         */
+        const discountValue = expectedValue - investment.value;
+        if (monthsPassed < 12) {
+          tax = 0.225;
+        } else if (monthsPassed >= 12 && monthsPassed < 24) {
+          tax = 0.185;
+        } else {
+          tax = 0.15;
+        }
+
+        const amountBalance = expectedValue - discountValue * tax;
+        payload['balance'] = Number(amountBalance.toFixed(2));
+      }
+
       return payload;
     } catch (error) {
       throw error;
@@ -146,11 +172,5 @@ export class InvestmentController {
       throw error;
     }
     return this.investmentService.update(id, updateInvestmentDto);
-  }
-
-  @Delete(':id')
-  @ApiOperation({ summary: 'Delete investment by ID' })
-  remove(@Param('id') id: string) {
-    return this.investmentService.remove(+id);
   }
 }
