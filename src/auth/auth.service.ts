@@ -28,8 +28,21 @@ export class AuthService {
       email: user.email,
     };
 
+    const accessToken = await this.jwtService.signAsync(payload);
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: accessToken,
     };
+  }
+
+  getUserIdFromToken(accessToken: string): string {
+    try {
+      const token = accessToken.split(' ')[1];
+      const decodedToken: any = this.jwtService.verify(token); // Usamos o método verify do JwtService para decodificar o token
+
+      const userId: string = decodedToken.sub;
+      return userId;
+    } catch (error) {
+      return null;
+    }
   }
 }

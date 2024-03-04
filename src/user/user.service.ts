@@ -28,6 +28,12 @@ export class UserService {
     });
   }
 
+  findOneByUsernameOrEmail(username: string, email: string) {
+    return this.userRepository.findOne({
+      where: [{ username: username }, { email: email }],
+    });
+  }
+
   findOne(id: string) {
     return this.userRepository.findOne({
       where: [{ id }],

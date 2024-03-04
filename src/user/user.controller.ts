@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  BadRequestException,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { HashPasswordPipe } from '../common/pipes/hash-password.pipe';
@@ -10,13 +17,19 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Creation new user request' })
+  @ApiOperation({ summary: 'Creation new user' })
   @ApiBody({ type: CreateUserDto })
   async create(
     @Body() createUserDto: CreateUserDto,
     @Body('password', HashPasswordPipe) passwordHashed: string,
   ) {
-    console.log(passwordHashed);
+    const userExists = await this.userService.findOneByUsernameOrEmail(
+      createUserDto.username,
+      createUserDto.email,
+    );
+    if (userExists) {
+      throw new BadRequestException('User already exists');
+    }
     const userCreated = await this.userService.create({
       ...createUserDto,
       password: passwordHashed,

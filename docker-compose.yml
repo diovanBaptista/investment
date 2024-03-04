@@ -1,27 +1,28 @@
 version: '3.5'
 
 services:
-  # nest-app:
-  #   build: .
-  #   ports:
-  #     - "3000:3000"
-  #   networks:
-  #     - app-network
-  #   volumes:
-  #     - .:/usr/src/app
-  #   depends_on: 
-  #     - database
+  nest-app:
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    volumes:
+      - .:/usr/src/app
+    depends_on: 
+      - database
+    restart: unless-stopped
 
-  # nginx:
-  #   build: nginx
-  #   ports:
-  #     - "8000:80"
-  #   volumes:
-  #     - .:/var/www
-  #   networks:
-  #     - app-network
-  #   depends_on:
-  #     - nest-app
+  nginx:
+    build: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+    networks:
+      - app-network
+    depends_on:
+      - nest-app
 
   database:
     image: postgres
