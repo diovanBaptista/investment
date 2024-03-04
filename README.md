@@ -56,9 +56,18 @@ Quando autenticar o usuário na rota **auth/login** cole o **access_token** em *
 
 <img src="screenshots/screenshot_3.png" alt="API UI">
 
+
+## 🚀 Extra
+Como parte extra, tomei a liberdade de criar um serviço simples de envio de email ao criar um investimento.
+
+<img src="screenshots/screenshot_4.png" alt="API UI">
+
+
+
 ## 📚 Libs utilizadas
 - *Swagger* : Documeção dos endpoints da RESTful API em um documento de forma agradável e visual.
 - *TypeORM* : Interação e manipulação do banco de dados de maneira simplificada e padronizada.
 - *Jest* : Para testes na aplicação. Usado nos modulo e entidade do TypeORM (simples).
 - *Class Validator* : Validação dos dados enviados pelo corpo da API. Validações personalizadas ou nativas da bibliotecas. O mesmo ajuda deixar o código mais limpo.
 - *JSON Web Token (JWT)* : Criação de dados com assinatura opcional e/ou criptografia. Muito segura para autentição do usuário na API.
+- *NodeMailler* : Envio de emails.

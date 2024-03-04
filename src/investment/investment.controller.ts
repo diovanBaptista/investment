@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   UseGuards,
   Req,
@@ -25,6 +24,8 @@ import {
 import { AuthGuard } from 'src/auth/auth.guard';
 import { AuthService } from 'src/auth/auth.service';
 import { differenceInMonths } from 'date-fns';
+import { EmailService } from 'src/email/email.service';
+import { UserService } from 'src/user/user.service';
 
 @Controller('investment')
 @ApiTags('investment')
@@ -34,12 +35,14 @@ export class InvestmentController {
   constructor(
     private readonly investmentService: InvestmentService,
     private authService: AuthService,
+    private emailService: EmailService,
+    private userService: UserService,
   ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create new investment' })
   @ApiBody({ type: CreateInvestmentDto })
-  create(
+  async ddddddcreate(
     @Body() createInvestmentDto: CreateInvestmentDto,
     @Req() request: Request,
   ) {
@@ -51,7 +54,10 @@ export class InvestmentController {
       ...createInvestmentDto,
     };
 
-    return this.investmentService.create(payload);
+    const investment = await this.investmentService.create(payload);
+    const findUser = await this.userService.findOne(getUserId);
+    await this.emailService.sendInvestmentConfirmation(findUser, investment);
+    return investment;
   }
 
   @Get()

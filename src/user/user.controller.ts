@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param, BadRequestException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  BadRequestException,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { HashPasswordPipe } from '../common/pipes/hash-password.pipe';
