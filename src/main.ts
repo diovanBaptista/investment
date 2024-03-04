@@ -10,7 +10,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Coderockr API')
-    .setDescription('The investments app using NestJS')
+    .setDescription('The investments app using NestJS #rockr_lovers')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

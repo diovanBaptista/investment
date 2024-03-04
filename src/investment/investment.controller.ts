@@ -81,7 +81,10 @@ export class InvestmentController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get investment by ID' })
+  @ApiOperation({
+    summary: 'Get investment by ID',
+    description: 'Get investment details and balance',
+  })
   async findOne(@Param('id') id: string) {
     try {
       const investment = await this.investmentService.findOne(id);
