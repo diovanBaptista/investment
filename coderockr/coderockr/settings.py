@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # apps
     'investment',
     # libs 
+    'rest_framework',
     'drf_yasg',
 ]
 
@@ -134,4 +135,10 @@ SWAGGER_SETTINGS = {
             'type': 'basic'
         }
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }
