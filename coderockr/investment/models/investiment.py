@@ -8,9 +8,9 @@ class Investiment(models.Model):
         max_length=100,
     )
 
-    creation_date = models.DateTimeField(
+    creation_date = models.DateField(
         verbose_name='Data de criação',
-        auto_now_add=True
+        # auto_now_add=True
     )
 
     value = models.DecimalField(

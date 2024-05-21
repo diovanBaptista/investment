@@ -7,7 +7,7 @@ from ..models import Investiment
 class InvestimentAdmin(admin.ModelAdmin):
     list_display = [
         'id',
-        'ower',
+        'owner',
         'creation_date',
         'value'
     ]
