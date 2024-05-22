@@ -1,20 +1,19 @@
 from django.contrib import admin
 
-from ..models import Investiment
+from ..models import Investor
 
 
-@admin.register(Investiment)
-class InvestimentAdmin(admin.ModelAdmin):
+@admin.register(Investor)
+class InvestorAdmin(admin.ModelAdmin):
     list_display = [
         'id',
-        'owner',
-        'creation_date',
-        'value'
+        'user',
+        'name'
     ]
 
     search_fields = [
         'id',
-        
+        'name'
     ]
 
     # list_filter = [
@@ -26,5 +25,5 @@ class InvestimentAdmin(admin.ModelAdmin):
     # ]
 
     autocomplete_fields = [
-        'owner'
+        'user'
     ]

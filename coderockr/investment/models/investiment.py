@@ -1,12 +1,13 @@
 from django.db import models
 from datetime import datetime
-
+from .investor import Investor
 
 class Investiment(models.Model):
 
-    owner = models.CharField(
+    owner = models.ForeignKey(
+       Investor,
         verbose_name='proprietário',
-        max_length=100,
+        on_delete=models.DO_NOTHING
     )
 
     creation_date = models.DateField(

@@ -23,6 +23,6 @@ class WithdrawAdmin(admin.ModelAdmin):
     #     'campos_dos_campos_fk
     # ]
 
-    # autocomplete_fields = [
-    #     'campos_fk
-    # ]
+    autocomplete_fields = [
+        'investment'
+    ]
