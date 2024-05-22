@@ -5,8 +5,16 @@ from datetime import datetime
 from ..models import Investiment
 from ..serializers import InvestimentSerializer
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
+
+
+class PaginacaoInvestment(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = "limit"
+    max_page_size = 1000
 
 class InvestimentationViewSet(viewsets.ModelViewSet):
+    pagination_class = (PaginacaoInvestment)
     queryset = Investiment.objects.all()
     serializer_class = InvestimentSerializer
     permission_classes = [IsAuthenticated]
