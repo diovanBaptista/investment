@@ -14,7 +14,9 @@ class Withdraw(models.Model):
     value = models.DecimalField(
         verbose_name="Valor",
         max_digits=10,
-        decimal_places=2
+        decimal_places=2,
+        null=True,
+        blank=True
     ) 
 
     withdrawal_date = models.DateField(

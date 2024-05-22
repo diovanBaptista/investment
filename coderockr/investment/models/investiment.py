@@ -26,15 +26,17 @@ class Investiment(models.Model):
         default=False,
     )
 
-    # investment_balance = models.DecimalField(
-    #     verbose_name="Saldo do Investimento",
-    #     max_digits=10,
-    #     decimal_places=2,
-    #     default=0
-    # )
+    balance = models.DecimalField(
+        verbose_name="Saldo",
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
 
     @property
     def saldo(self):
+        from .withdraw import Withdraw
         value = self.value 
         date = self.creation_date
         current_date = datetime.now() 
@@ -49,6 +51,10 @@ class Investiment(models.Model):
         saldo = float(value)
         for _ in range(months_passed):
             saldo += saldo * 0.52
+
+        # if self.investment_withdrawal:
+        #     withdraw = Withdraw.objects.get(id=self.id)
+            # saldo = withdraw.valor_final - float(self.value)
 
         return round(saldo,2)
 

@@ -33,26 +33,16 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         value = request.data.get('value', None)
         creation_date = request.data.get('creation_date', None)
+        if creation_date:
+            creation_date = datetime.strptime(creation_date, '%Y-%m-%d')
+            current_date = datetime.now()
+            if creation_date > current_date:
+                return JsonResponse({"Error": "Não pode atualizar a data de cadastros do investimento  para uma data futura"})
 
-        creation_date = datetime.strptime(creation_date, '%Y-%m-%d')
-        current_date = datetime.now()
-        if creation_date > current_date:
-            return JsonResponse({"Error": "Não pode atualizar a data de cadastros do investimento  para uma data futura"})
-
-        if float(value) < 0:
+        if value and float(value) < 0:
             return JsonResponse({"Error": "O Valor não pode ser Atualizado para um valor Negativo"})
         return super().update(request, *args, **kwargs)
     
-    # @action(methods=['POST'],detail=True)
-    # def saque(self, request, pk=None):
-    #     current_date = datetime.now()
-    #     investment = Investiment.objects.get(id=pk)
-    #     creation_date = datetime.strptime(investment.creation_date, '%Y-%m-%d')
-    #     # if current_date > creation_date:
-    #     #      return JsonResponse({"Error": "Saque não pode ser feito em uma data futura"})
-        
-        
-    #     valor_saque = investment.saldo
         
 
         

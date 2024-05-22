@@ -4,7 +4,7 @@ from ..models import Investiment
 
 
 class InvestimentSerializer(serializers.ModelSerializer):
-    saldo = serializers.ReadOnlyField()
+    balance = serializers.ReadOnlyField()
     class Meta:
         model = Investiment
         fields = '__all__'
