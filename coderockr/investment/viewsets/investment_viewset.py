@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
 from ..models import Investiment
 from ..serializers import InvestimentSerializer
-
+from rest_framework.decorators import action
 
 class InvestimentationViewSet(viewsets.ModelViewSet):
     queryset = Investiment.objects.all()
@@ -42,3 +42,17 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
         if float(value) < 0:
             return JsonResponse({"Error": "O Valor não pode ser Atualizado para um valor Negativo"})
         return super().update(request, *args, **kwargs)
+    
+    # @action(methods=['POST'],detail=True)
+    # def saque(self, request, pk=None):
+    #     current_date = datetime.now()
+    #     investment = Investiment.objects.get(id=pk)
+    #     creation_date = datetime.strptime(investment.creation_date, '%Y-%m-%d')
+    #     # if current_date > creation_date:
+    #     #      return JsonResponse({"Error": "Saque não pode ser feito em uma data futura"})
+        
+        
+    #     valor_saque = investment.saldo
+        
+
+        
