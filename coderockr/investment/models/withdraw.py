@@ -22,6 +22,11 @@ class Withdraw(models.Model):
         # auto_now_add=True
     )
 
+    withdraw_full_amount = models.BooleanField(
+        verbose_name='Saquar Valor total',
+        default=False,
+    )
+
     def __str__(self):
         '''Método que retorna a representação do objeto como string.'''
         return f"Saque do investimento {self.investment}"
