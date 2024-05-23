@@ -60,6 +60,22 @@ instale as dependenciado  executando o seguinte comando:
     python3 manage.py runserver
  ```
 
+
+após rodar porjeto entre no navegador e digite a seguinte url para ser redirecionado ao Swagger
+
+```
+    http://localhost:8000/swagger/
+ ```
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/606abd3f-2fb0-4f4d-aa96-acaa1ab8fa35)
+> A fim de garantir a segurança e a integridade dos dados em nossa API, é necessário autenticar-se antes de efetuar alterações. Por favor, não utilize o botão 'Authorize' para inserir suas credenciais de usuário e senha.
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/2bc84e7f-fbd5-4307-a447-b74f0c318372)
+> Exemplo username: diovan;  passwoerd: papa1539
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/82569c82-697f-40a4-99d9-109962bf441c)
+
+
 ## Rotas do Investidor (Investor)
 
 ![image](https://github.com/diovanBaptista/investment/assets/84948264/a4a8c9ee-d6b7-4ba2-9bc1-9961a38897db)
