@@ -18,9 +18,9 @@ class Investor(models.Model):
         max_length=16,
     )
 
-    email = models.EmailField(
-        verbose_name="Email",
-    )
+    # email = models.EmailField(
+    #     verbose_name="Email",
+    # )
 
    
 

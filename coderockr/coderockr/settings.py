@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'investment',
     # libs 
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -138,7 +140,12 @@ SWAGGER_SETTINGS = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
 }

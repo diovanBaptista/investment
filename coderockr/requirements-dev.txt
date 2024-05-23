@@ -53,7 +53,7 @@ django-widget-tweaks==1.4.12
 django_debug_toolbar==3.8.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
-djoser==2.2.0
+djoser==2.2.2
 dnspython==2.3.0
 docutils==0.19
 docx2pdf==0.1.8
