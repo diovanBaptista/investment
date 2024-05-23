@@ -101,7 +101,7 @@ SWAGGER_SETTINGS = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.permissions.IsAuthenticated',

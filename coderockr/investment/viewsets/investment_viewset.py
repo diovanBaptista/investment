@@ -17,7 +17,7 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
     pagination_class = (PaginacaoInvestment)
     queryset = Investiment.objects.all()
     serializer_class = InvestimentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
     filter_backends = [filters.SearchFilter]
 
@@ -39,6 +39,8 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
     
     def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        print(instance)
         value = request.data.get('value', None)
         creation_date = request.data.get('creation_date', None)
         if creation_date:
@@ -49,6 +51,22 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
 
         if value and float(value) < 0:
             return JsonResponse({"Error": "O Valor não pode ser Atualizado para um valor Negativo"})
+        
+        date = creation_date if creation_date else instance.creation_date
+        current_date = datetime.now() 
+        months_passed = (current_date.year - date.year) * 12 + current_date.month - date.month
+        
+        # Se o dia atual for menor que o dia de criação, ajusta o número de meses
+        if current_date.day < date.day:
+            months_passed -= 1
+
+        # Calcula o saldo acumulado multiplicando pelo fator mensal 0,52
+        saldo = float(value)
+        for _ in range(months_passed):
+            saldo += saldo * 0.52
+
+        instance.balance = round(saldo,2)
+        instance.save()
         return super().update(request, *args, **kwargs)
     
         
