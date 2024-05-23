@@ -41,7 +41,8 @@ class Investiment(models.Model):
         value = self.value 
         date = self.creation_date
         current_date = datetime.now() 
-
+        date = f"{date}"
+        date = datetime.strptime(date, "%Y-%m-%d")
         months_passed = (current_date.year - date.year) * 12 + current_date.month - date.month
         
         # Se o dia atual for menor que o dia de criação, ajusta o número de meses

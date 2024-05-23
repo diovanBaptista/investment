@@ -11,6 +11,8 @@ def investment_post_save(sender, instance, created, **kwargs):
         value = instance.value 
         date = instance.creation_date
         current_date = datetime.now() 
+        date = f"{date}"
+        date = datetime.strptime(date, "%Y-%m-%d")
 
         months_passed = (current_date.year - date.year) * 12 + current_date.month - date.month
         
