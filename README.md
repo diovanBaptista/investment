@@ -60,83 +60,296 @@ instale as dependenciado  executando o seguinte comando:
     python3 manage.py runserver
  ```
 
-1. __Creation__ of an investment with an owner, a creation date and an amount.
-    1. The creation date of an investment can be today or a date in the past.
-    2. An investment should not be or become negative.
-2. __View__ of an investment with its initial amount and expected balance.
-    1. Expected balance should be the sum of the invested amount and the [gains][].
-    2. If an investment was already withdrawn then the balance must reflect the gains of that investment
-3. __Withdrawal__ of a investment.
-    1. The withdraw will always be the sum of the initial amount and its gains,
-       partial withdrawn is not supported.
-    2. Withdrawals can happen in the past or today, but can't happen before the investment creation or the future.
-    3. [Taxes][taxes] need to be applied to the withdrawals before showing the final value.
-4. __List__ of a person's investments
-    1. This list should have pagination.
+## Rotas do Investidor (Investor)
 
-__NOTE:__ the implementation of an interface will not be evaluated.
+![image](https://github.com/diovanBaptista/investment/assets/84948264/a4a8c9ee-d6b7-4ba2-9bc1-9961a38897db)
+> Ao criar um investidor, um usuário correspondente será automaticamente gerado com base nos dados fornecidos, permitindo uma experiência de usuário mais integrada e simplificada. Isso significa que, ao registrar um novo investidor, um usuário será criado simultaneamente, usando as informações fornecidas, como nome de usuário, e-mail e senha. Essa abordagem facilita o processo de registro e elimina a necessidade de criar separadamente uma conta de usuário para cada investidor.
 
-### Gain Calculation
+Listar Investidores
 
-The investment will pay 0.52% every month in the same day of the investment creation.
+Endpoint: /investor/investor/
 
-Given that the gain is paid every month, it should be treated as [compound gain][], which means that every new period (month) the amount gained will become part of the investment balance for the next payment.
+    GET: Retorna uma lista de todos os investidores cadastrados.
+        Nome da View: investor_investor_list
 
-### Taxation
+Criar Novo Investidor
 
-When money is withdrawn, tax is triggered. Taxes apply only to the profit/gain portion of the money withdrawn. For example, if the initial investment was 1000.00, the current balance is 1200.00, then the taxes will be applied to the 200.00.
+Endpoint: /investor/investor/
 
-The tax percentage changes according to the age of the investment:
-* If it is less than one year old, the percentage will be 22.5% (tax = 45.00).
-* If it is between one and two years old, the percentage will be 18.5% (tax = 37.00).
-* If older than two years, the percentage will be 15% (tax = 30.00).
+    POST: Cria um novo investidor com os dados fornecidos.
+        Nome da View: investor_investor_create
+        Corpo da Requisição:
 
-## Requirements
-1. Create project using any technology of your preference. It’s perfectly OK to use vanilla code or any framework or libraries;
-2. Although you can use as many dependencies as you want, you should manage them wisely;
-3. It is not necessary to send the notification emails, however, the code required for that would be welcome;
-4. The API must be documented in some way.
+        json
 
-## Deliverables
-The project source code and dependencies should be made available in GitHub. Here are the steps you should follow:
-1. Fork this repository to your GitHub account (create an account if you don't have one, you will need it working with us).
-2. Create a "development" branch and commit the code to it. Do not push the code to the main branch.
-3. Include a README file that describes:
-    - Special build instructions, if any
-    - List of third-party libraries used and short description of why/how they were used
-    - A link to the API documentation.
-4. Once the work is complete, create a pull request from "development" into "main" and send us the link.
-5. Avoid using huge commits hiding your progress. Feel free to work on a branch and use `git rebase` to adjust your commits before submitting the final version.
+        {
+          "user": {
+            "username": "3HbfNtx3lF1ym95t@oH9PdHuJ4QRIaSfqKe97GZZiXBcvL2jwQ8_GWrZC.S+_xvn.ZAJ1KXAkEg8.OniFLJQgK",
+            "email": "user@example.com",
+            "password": "string"
+          },
+          "name": "string",
+          "cpf": "string"
+        }
+> É importante observar que, após a criação, a data de criação do usuário estará disponível apenas para leitura nas APIs de consulta (GET)
+Detalhes do Investidor
 
-## Coding Standards
-When working on the project be as clean and consistent as possible.
+Endpoint: /investor/investor/{id}/
 
-## Project Deadline
-Ideally you'd finish the test project in 5 days. It shouldn't take you longer than a entire week.
+    GET: Retorna os detalhes de um investidor específico com base no ID.
+        Parâmetro: {id} - ID único do investidor.
+        Nome da View: investor_investor_read
 
-## Quality Assurance
-Use the following checklist to ensure high quality of the project.
+Atualizar Investidor
 
-### General
-- First of all, the application should run without errors.
-- Are all requirements set above met?
-- Is coding style consistent?
-- The API is well documented?
-- The API has unit tests?
+Endpoint: /investor/investor/{id}/
 
-## Submission
-1. A link to the Github repository.
-2. Briefly describe how you decided on the tools that you used.
+    PUT: Atualiza todos os campos de um investidor específico com base no ID.
+        Parâmetro: {id} - ID único do investidor.
+        Nome da View: investor_investor_update
 
-## Have Fun Coding 🤘
-- This challenge description is intentionally vague in some aspects, but if you need assistance feel free to ask for help.
-- If any of the seems out of your current level, you may skip it, but remember to tell us about it in the pull request.
+Atualização Parcial do Investidor
 
-## Credits
+Endpoint: /investor/investor/{id}/
 
-This coding challenge was inspired on [kinvoapp/kinvo-back-end-test](https://github.com/kinvoapp/kinvo-back-end-test/blob/2f17d713de739e309d17a1a74a82c3fd0e66d128/README.md)
+    PATCH: Atualiza parcialmente os campos de um investidor específico com base no ID.
+        Parâmetro: {id} - ID único do investidor.
+        Nome da View: investor_investor_partial_update
 
-[gains]: #gain-calculation
-[taxes]: #taxation
-[interest]: #interest-calculation
-[compound gain]: https://www.investopedia.com/terms/g/gain.asp
+Remover Investidor
+
+Endpoint: /investor/investor/{id}/
+
+    DELETE: Remove um investidor específico com base no ID.
+        Parâmetro: {id} - ID único do investidor.
+        Nome da View: investor_investor_delete
+
+
+## Autenticação lib Djoser
+   Endpoint de Login de Token (v1)
+   POST /v1/auth/token/login/
+   
+   Use este endpoint para obter um token de autenticação de usuário.
+   Parâmetros
+   
+       data: Objeto contendo os dados de autenticação do usuário.
+           username: Nome de usuário do usuário.
+           password: Senha do usuário.
+   
+      Exemplo de Corpo da Requisição
+      
+      json
+      
+      {
+        "username": "string",
+        "password": "string"
+      }
+      
+      Respostas
+      
+          Código 201: Token de autenticação foi gerado com sucesso.
+              Exemplo de Corpo da Resposta:
+      
+              json
+      
+              {
+                "token": "string"
+              }
+   
+   Endpoint de Logout de Token (v1)
+   POST /v1/auth/token/logout/
+   
+   Use este endpoint para fazer logout do usuário (remover o token de autenticação do usuário).
+   Parâmetros
+   
+      Este endpoint não aceita parâmetros.
+      Respostas
+   
+       Código 201: Logout realizado com sucesso.
+
+## Rotas do Investimento (Investment)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/7f28f140-f9ba-4a1e-80d3-4f6c92978676)
+> Optei por criar uma modelagem adicional para representar os investimentos na nossa API. Esta modelagem recebe uma chave estrangeira (foreign key - fk) de investidor, estabelecendo uma conexão direta entre os investimentos e os investidores correspondentes.
+
+> Além disso, implementamos validações para garantir a integridade dos dados. Na nossa API, não é permitido criar um investimento com valor negativo ou investir em uma data posterior à data atual. Da mesma forma, não é possível alterar o valor do investimento para um valor negativo ou para uma data posterior à data atual.
+
+> Entretanto, é possível criar um investimento com uma data anterior à data atual, proporcionando flexibilidade ao usuário nesse aspecto.
+Listar Investimentos
+
+> Optei por adicionar um campo booleano para cada investimento, denominado "sacado", que serve para verificar se o investimento foi sacado ou não. Quando um investimento é sacado, esse campo é alterado para "true", indicando que o investimento foi resgatado.
+
+> Além disso, introduzi o conceito de "balance" (saldo) na nossa API. O saldo do investimento representa o valor total do investimento antes do resgate, ou seja, inclui o valor inicial investido e os rendimentos acumulados até o momento em que o investimento é sacado.
+
+> Essas adições proporcionam uma visão mais completa e detalhada sobre o estado dos investimentos na nossa plataforma, permitindo ao usuário acompanhar o saldo atual e verificar se um investimento já foi resgatado ou não.
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/7711ff5a-a6bc-485f-9f68-a6784f598663)
+> Segue um exemplo com dois investimentos: um investimento já sacado e outro ainda não sacado. No caso do investimento que foi sacado, o campo "balance" representa o lucro líquido obtido com o investimento, após a dedução do imposto sobre o lucro. Esse imposto é aplicado apenas sobre os ganhos do investimento e é deduzido no momento do saque.
+
+    Investimento Sacado:
+        ID: 1
+        Balance: $101.56 
+        Data de Criação: 23 de Março de 2024
+        Valor Investido: $100.00
+        Investimento Sacado: Sim
+        Proprietário: Usuário de ID 4
+
+    Investimento Não Sacado:
+        ID: 2
+        Balance: $346.56
+        Data de Criação: 23 de Março de 2024
+        Valor Investido: $150.00
+        Investimento Sacado: Não
+        Proprietário: Usuário de ID 4
+
+Endpoint: /investment/investment/
+
+    GET: Retorna uma lista de todos os investimentos cadastrados.
+        Nome da View: investment_investment_list
+
+Criar Novo Investimento
+
+Endpoint: /investment/investment/
+
+    POST: Cria um novo investimento com os dados fornecidos.
+        Nome da View: investment_investment_create
+        Corpo da Requisição:
+
+        json
+
+        {
+          "creation_date": "string (formato: YYYY-MM-DD)",
+          "value": "string",
+          "investment_withdrawal": "boolean",
+          "owner": "integer"
+        }
+
+Detalhes do Investimento
+
+Endpoint: /investment/investment/{id}/
+
+    GET: Retorna os detalhes de um investimento específico com base no ID.
+        Parâmetro: {id} - ID único do investimento.
+        Nome da View: investment_investment_read
+
+Atualizar Investimento
+
+Endpoint: /investment/investment/{id}/
+
+    PUT: Atualiza todos os campos de um investimento específico com base no ID.
+        Parâmetro: {id} - ID único do investimento.
+        Nome da View: investment_investment_update
+
+Atualização Parcial do Investimento
+
+Endpoint: /investment/investment/{id}/
+
+    PATCH: Atualiza parcialmente os campos de um investimento específico com base no ID.
+        Parâmetro: {id} - ID único do investimento.
+        Nome da View: investment_investment_partial_update
+
+Remover Investimento
+
+Endpoint: /investment/investment/{id}/
+
+    DELETE: Remove um investimento específico com base no ID.
+        Parâmetro: {id} - ID único do investimento.
+        Nome da View: investment_investment_delete
+
+
+## Rotas de Saque (Withdraw)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/07ff9385-bcbc-471b-b95b-df023f54fff0)
+> O modelo de saque foi desenvolvido para permitir que os investidores realizem retiradas dos seus investimentos. Esse modelo possui um campo para o valor do saque e uma opção para sacar o valor total do saldo de investimento sem a necessidade de digitar manualmente. Abaixo estão os detalhes e validações implementadas:
+
+> Chave Estrangeira investment: Este campo estabelece uma relação com o modelo de investimento, indicando de qual investimento o saque está sendo realizado. Um investimento só pode ter um saque associado a ele.
+
+> Campo value: Este campo permite ao investidor digitar o valor que deseja sacar. No entanto, a aplicação não permite saques parciais. Se um valor for inserido, ele deve ser igual ao saldo total do investimento.
+
+> Campo withdraw_full_amount: Este é um campo booleano que, quando marcado como true, automaticamente define o valor do saque para o saldo total do investimento, sem que o investidor precise inserir manualmente.
+
+    Campo withdraw_date: A data do saque. Existem validações importantes para este campo:
+        A data do saque não pode ser anterior à data de criação do investimento.
+        A data do saque não pode ser posterior à data atual.
+
+> Além disso, a API calcula o imposto sobre o rendimento do investimento, conforme descrito a seguir:
+Cálculo de Imposto
+
+    O imposto é calculado com base na duração do investimento:
+
+    Menos de 1 ano: 22,5%
+    De 1 a 2 anos: 18,5%
+    Mais de 2 anos: 15%
+
+    O imposto é aplicado apenas sobre o ganho do investimento (diferença entre o saldo atual e o valor inicial investido).
+    
+> Campo de Valor Final
+   O campo valor_final representa o saldo do investimento após a dedução do imposto. Esse valor é calculado automaticamente durante o processo de saque.
+   Validações Adicionais
+
+> Restrição de Saques Múltiplos: Um investimento não pode ter mais de um saque associado a ele. Se já existir um saque registrado para um determinado investimento, não será permitido criar um novo saque para o mesmo investimento.
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/fc95e5e6-c2c7-45a9-8ce1-e5c8e0cd2a1a)
+> Exemplo de um Saque
+
+
+
+Listar Saques
+
+Endpoint: /withdraw/withdraw/
+
+    GET: Retorna uma lista de todos os saques realizados.
+        Nome da View: withdraw_withdraw_list
+
+Criar Novo Saque
+
+Endpoint: /withdraw/withdraw/
+
+    POST: Realiza um novo saque com os dados fornecidos.
+        Nome da View: withdraw_withdraw_create
+        Corpo da Requisição:
+
+        json
+
+        {
+          "value": "string",
+          "withdrawal_date": "string (formato: YYYY-MM-DD)",
+          "withdraw_full_amount": "boolean",
+          "investment": "integer"
+        }
+
+Detalhes do Saque
+
+Endpoint: /withdraw/withdraw/{id}/
+
+    GET: Retorna os detalhes de um saque específico com base no ID.
+        Parâmetro: {id} - ID único do saque.
+        Nome da View: withdraw_withdraw_read
+
+Atualizar Saque
+
+Endpoint: /withdraw/withdraw/{id}/
+
+    PUT: Atualiza todos os campos de um saque específico com base no ID.
+        Parâmetro: {id} - ID único do saque.
+        Nome da View: withdraw_withdraw_update
+
+Atualização Parcial do Saque
+
+Endpoint: /withdraw/withdraw/{id}/
+
+    PATCH: Atualiza parcialmente os campos de um saque específico com base no ID.
+        Parâmetro: {id} - ID único do saque.
+        Nome da View: withdraw_withdraw_partial_update
+
+Remover Saque
+
+Endpoint: /withdraw/withdraw/{id}/
+
+    DELETE: Remove um saque específico com base no ID.
+        Parâmetro: {id} - ID único do saque.
+        Nome da View: withdraw_withdraw_delete
+
+
