@@ -15,3 +15,7 @@ class InvestorViewSet(viewsets.ModelViewSet):
     search_fields = [
         
     ]
+
+    def create(self, request, *args, **kwargs):
+        user = request.data.get('user',None)
+        return super().create(request, *args, **kwargs)
