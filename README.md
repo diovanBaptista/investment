@@ -45,9 +45,14 @@ Com o ambiente virtual ativado,acesse a pasta ate diretorio principal do projeto
 ```
     cd coderockr
  ```
+
+mude para a branch de desenvolvimento 
+```
+    git checkout development 
+ ```
 instale as dependenciado  executando o seguinte comando:
  ```
-    pip install requirements-dev.txt
+    pip install -r requirements-dev.txt
  ```
  executa oo projeto com o seguinte comando:
 
