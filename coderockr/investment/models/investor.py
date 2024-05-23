@@ -22,6 +22,11 @@ class Investor(models.Model):
     #     verbose_name="Email",
     # )
 
+
+    @property
+    def data_criacao(self):
+        return self.user.date_joined if self.user else None
+
    
 
     def __str__(self):

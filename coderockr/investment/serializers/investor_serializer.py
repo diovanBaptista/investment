@@ -6,7 +6,7 @@ from ..models import Investor
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'email', 'password',]
         ref_name = "InvestmentUserSerializer"
         # extra_kwargs = {'password': {'write_only': True}}
 
@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class InvestorSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-
+    data_criacao = serializers.ReadOnlyField()
     class Meta:
         model = Investor
         fields = '__all__'
