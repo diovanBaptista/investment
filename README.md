@@ -1,10 +1,59 @@
-# salve <img src="https://coderockr.com/assets/images/coderockr.svg" align="right" height="50px" />
+# # Investments API Coderockr  <img src="https://coderockr.com/assets/images/coderockr.svg" align="right" height="50px" />
 
-You should see this challenge as an opportunity to create an application following modern development best practices (given the stack of your choice), but also feel free to use your own architecture preferences (coding standards, code organization, third-party libraries, etc). It’s perfectly fine to use vanilla code or any framework or libraries.
+Bem-vindo à API de Investimento! Esta API foi desenvolvida para proporcionar uma experiência simplificada e completa para gestão de investimentos. Utilizando Python com o framework Django, oferecemos uma solução abrangente que permite aos usuários criar contas de investimento e efetuar saques de forma eficiente e segura.
 
-## Scope
+## Configuração do Ambiente de Desenvolvimento
 
-In this challenge you should build an API for an application that stores and manages investments, it should have the following features:
+1. Instalação do Python
+   <p>Certifique-se de ter o Python instalado em seu sistema. Você pode baixar a versão mais recente do Python em python.org.</p>
+   
+2. Clonar o Repositório
+    Clone o repositório da API de Investimento para uma pasta de sua escolha. Abra o terminal e execute o seguinte comando:
+   ```
+    git clone https://github.com/diovanBaptista/investment.git
+   ```
+   
+4. Criando um Ambiente Virtual
+    <p>É recomendável criar um ambiente virtual para isolar as dependências do projeto. Abra o terminal e execute os seguintes comandos: </p>
+    
+        ```
+       Instale o pacote 'virtualenv' se ainda não estiver instalado
+   
+            pip install virtualenv
+        
+        Crie um ambiente virtual na pasta do seu projeto
+        
+            virtualenv venv
+        
+        Ative o ambiente virtual
+         No Windows:
+   
+        venv\Scripts\activate
+        
+         No MacOS/Linux:
+         
+        source venv/bin/activate
+        ```
+
+
+3. Instalando as dependenciado projeto
+
+Com o ambiente virtual ativado,acesse a pasta ate diretorio principal do projeto.
+```
+    cd investment
+ ```
+```
+    cd coderockr
+ ```
+instale as dependenciado  executando o seguinte comando:
+ ```
+    pip install requirements-dev.txt
+ ```
+ executa oo projeto com o seguinte comando:
+
+```
+    python3 manage.py runserver
+ ```
 
 1. __Creation__ of an investment with an owner, a creation date and an amount.
     1. The creation date of an investment can be today or a date in the past.
