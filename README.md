@@ -67,12 +67,23 @@ instale as dependenciado  executando o seguinte comando:
 
 Listar Investidores
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/6580c423-c41e-471d-8fd0-6cff0cb4ca16)
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/b6cc7978-0b2a-49b7-9cc6-9c8cd89ddca5)
+
+
 Endpoint: /investor/investor/
 
     GET: Retorna uma lista de todos os investidores cadastrados.
         Nome da View: investor_investor_list
 
 Criar Novo Investidor
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/47ddda61-bb2f-4341-a70f-2ea2be08ac1a)
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/2736d194-4c14-4ad8-bf24-e886b04c5689)
 
 Endpoint: /investor/investor/
 
@@ -96,19 +107,33 @@ Detalhes do Investidor
 
 Endpoint: /investor/investor/{id}/
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/cefd8eab-eeb7-4c6f-bc9e-72f2c46d683b)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/f1da7649-c0e8-4a69-a44a-f5cf9326a558)
+
     GET: Retorna os detalhes de um investidor específico com base no ID.
         Parâmetro: {id} - ID único do investidor.
         Nome da View: investor_investor_read
 
 Atualizar Investidor
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/4a8f93cc-1b8a-461b-8c06-cc793fcc3b8a)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/3a1eb1fa-9e07-40ea-8a1f-9c788d18dccc)
+
+
 Endpoint: /investor/investor/{id}/
+
 
     PUT: Atualiza todos os campos de um investidor específico com base no ID.
         Parâmetro: {id} - ID único do investidor.
         Nome da View: investor_investor_update
 
 Atualização Parcial do Investidor
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/0b8f7019-355d-4e92-9a4c-f5a7658b203c)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/6ca4c2ab-94ff-49fa-8b32-fbd0588e8587)
 
 Endpoint: /investor/investor/{id}/
 
@@ -117,6 +142,9 @@ Endpoint: /investor/investor/{id}/
         Nome da View: investor_investor_partial_update
 
 Remover Investidor
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/d8b19070-66ac-49cd-b500-58feadb45e06)
+
 
 Endpoint: /investor/investor/{id}/
 
@@ -203,12 +231,31 @@ Listar Investimentos
         Investimento Sacado: Não
         Proprietário: Usuário de ID 4
 
+Listar Investimento
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/fef6b26e-6f68-42b9-af2f-e9d41cdf9b3d)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/4cd4238f-64fb-4f3f-a8af-1f60f7dac103)
+
+> Vale apena obsrvar que também essa apis estão paginadas, no exemplo abaixo coloquei limit 1 sera exibida apenas 1 por pagina na api
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/1e5ee0ef-5b1c-4f1a-8707-3f041433aaa4)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/b53de8b5-88c2-4e8a-85d6-625fa151a2ac)
+
+
+
 Endpoint: /investment/investment/
 
     GET: Retorna uma lista de todos os investimentos cadastrados.
         Nome da View: investment_investment_list
 
 Criar Novo Investimento
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/ca839f11-b6af-4b01-a05a-2fa36bac5dc4)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/7371ef4a-7e57-44c3-9651-7a480561fe25)
+
 
 Endpoint: /investment/investment/
 
@@ -227,6 +274,12 @@ Endpoint: /investment/investment/
 
 Detalhes do Investimento
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/57b84454-9c41-4365-a7e7-9ab7f76c20c9)
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/2f66a786-2f21-4db5-9710-55fdc58281ca)
+
+
 Endpoint: /investment/investment/{id}/
 
     GET: Retorna os detalhes de um investimento específico com base no ID.
@@ -234,6 +287,12 @@ Endpoint: /investment/investment/{id}/
         Nome da View: investment_investment_read
 
 Atualizar Investimento
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/7ab953a4-e5b9-4a51-acc4-2faa6324a94b)
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/259c5642-d507-47cd-a129-f82c606ffb14)
+
 
 Endpoint: /investment/investment/{id}/
 
@@ -243,6 +302,11 @@ Endpoint: /investment/investment/{id}/
 
 Atualização Parcial do Investimento
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/5388485d-9c55-4756-af3d-b462e50ba429)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/b125be6d-98c4-42e9-9b00-9bc38cd7ec43)
+
+
 Endpoint: /investment/investment/{id}/
 
     PATCH: Atualiza parcialmente os campos de um investimento específico com base no ID.
@@ -250,6 +314,9 @@ Endpoint: /investment/investment/{id}/
         Nome da View: investment_investment_partial_update
 
 Remover Investimento
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/a0305f07-6272-4fdb-9e60-cb87780bc63d)
+
 
 Endpoint: /investment/investment/{id}/
 
@@ -298,12 +365,23 @@ Cálculo de Imposto
 
 Listar Saques
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/2d0a5ee0-a56e-450c-b24d-9beb70b3d4eb)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/7cdcd440-bea1-4304-94ea-9ad780020003)
+> Api tembém é paginada!
+
 Endpoint: /withdraw/withdraw/
 
     GET: Retorna uma lista de todos os saques realizados.
         Nome da View: withdraw_withdraw_list
 
 Criar Novo Saque
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/6a6fe6f1-b059-4246-bb18-0aac055fd27c)
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/3eb24e3c-bf2e-4ed2-ac21-090748e02a82)
+
 
 Endpoint: /withdraw/withdraw/
 
@@ -322,13 +400,24 @@ Endpoint: /withdraw/withdraw/
 
 Detalhes do Saque
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/4ab5a5cd-00b6-44d7-a6f0-c3b497bf7ca3)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/2013956c-fe8f-49e1-8e26-3c0b95731cf5)
+
+
 Endpoint: /withdraw/withdraw/{id}/
+
 
     GET: Retorna os detalhes de um saque específico com base no ID.
         Parâmetro: {id} - ID único do saque.
         Nome da View: withdraw_withdraw_read
 
 Atualizar Saque
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/4f9c15ca-eb04-4212-a689-ba2bee568fd9)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/51f3e7f4-ee20-4de2-97dd-4702de3478be)
+
 
 Endpoint: /withdraw/withdraw/{id}/
 
@@ -338,6 +427,11 @@ Endpoint: /withdraw/withdraw/{id}/
 
 Atualização Parcial do Saque
 
+![image](https://github.com/diovanBaptista/investment/assets/84948264/ebefbdd3-4003-47f7-a3de-d2606154ce04)
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/042d0825-469b-4571-b854-d6e6fe70277e)
+
+
 Endpoint: /withdraw/withdraw/{id}/
 
     PATCH: Atualiza parcialmente os campos de um saque específico com base no ID.
@@ -345,6 +439,9 @@ Endpoint: /withdraw/withdraw/{id}/
         Nome da View: withdraw_withdraw_partial_update
 
 Remover Saque
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/0066c71e-483f-4afc-b659-3a6c85475879)
+
 
 Endpoint: /withdraw/withdraw/{id}/
 
