@@ -348,8 +348,6 @@ Endpoint: /investment/investment/{id}/
 
 > Chave Estrangeira investment: Este campo estabelece uma relação com o modelo de investimento, indicando de qual investimento o saque está sendo realizado. Um investimento só pode ter um saque associado a ele.
 
-> Campo value: Este campo permite ao investidor digitar o valor que deseja sacar. No entanto, a aplicação não permite saques parciais. Se um valor for inserido, ele deve ser igual ao saldo total do investimento.
-
 > Campo withdraw_full_amount: Este é um campo booleano que, quando marcado como true, automaticamente define o valor do saque para o saldo total do investimento, sem que o investidor precise inserir manualmente.
 
     Campo withdraw_date: A data do saque. Existem validações importantes para este campo:
@@ -408,7 +406,6 @@ Endpoint: /withdraw/withdraw/
         json
 
         {
-          "value": "string",
           "withdrawal_date": "string (formato: YYYY-MM-DD)",
           "withdraw_full_amount": "boolean",
           "investment": "integer"
