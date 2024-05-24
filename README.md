@@ -67,7 +67,7 @@ Com banco criado, rodamos um comando para criar super usuario:
 
 preencha o username, email e password:
    ![image](https://github.com/diovanBaptista/investment/assets/84948264/162e285b-216f-460d-bbe6-68b85547bbd8)
-> Observação ao digitar a senha ele nao exibira visualmente!
+> Observação ao digitar a senha ele não exibira visualmente!
 
 
 Para rodar os teste unitario feito na api, antes de rodar o servidor execute o segundo comando:
