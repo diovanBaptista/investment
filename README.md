@@ -54,6 +54,27 @@ instale as dependenciado  executando o seguinte comando:
  ```
     pip install -r requirements-dev.txt
  ```
+
+Após instalar as dependências, execute python3 manage.py migrate para configurar o banco de dados:
+
+```
+    python3 manage.py migrate
+ ```
+Com banco criado, rodamos um comando para criar super usuario:
+```
+    python3 manage.py createsuperuser
+```
+
+preencha o username, email e password:
+   ![image](https://github.com/diovanBaptista/investment/assets/84948264/162e285b-216f-460d-bbe6-68b85547bbd8)
+> Observação ao digitar a senha ele nao exibira visualmente!
+
+
+Para rodar os teste unitario feito na api, antes de rodar o servidor execute o segundo comando:
+```
+   python3 manage.py test investment.tests
+```
+
  executa oo projeto com o seguinte comando:
 
 ```
@@ -67,6 +88,7 @@ após rodar porjeto entre no navegador e digite a seguinte url para ser redireci
     http://localhost:8000/swagger/
  ```
 
+
 ![image](https://github.com/diovanBaptista/investment/assets/84948264/606abd3f-2fb0-4f4d-aa96-acaa1ab8fa35)
 > A fim de garantir a segurança e a integridade dos dados em nossa API, é necessário autenticar-se antes de efetuar alterações. Por favor, não utilize o botão 'Authorize' para inserir suas credenciais de usuário e senha.
 
@@ -74,6 +96,33 @@ após rodar porjeto entre no navegador e digite a seguinte url para ser redireci
 > Exemplo username: diovan;  passwoerd: papa1539
 
 ![image](https://github.com/diovanBaptista/investment/assets/84948264/82569c82-697f-40a4-99d9-109962bf441c)
+
+
+## Extra Envio de E-mails
+
+A API possui funcionalidades de envio de e-mails em três situações diferentes:
+
+### 1. Cadastro de Novo Investidor
+
+Após o cadastro de um novo investidor na API, um e-mail de boas-vindas é enviado para informar sobre o sucesso do cadastro e fornecer informações úteis sobre como começar a investir.
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/6297f9fd-d7f4-489e-a9a7-654a54f74311)
+
+
+### 2. Realização de Novo Investimento
+
+Após a realização de um novo investimento, um e-mail de confirmação é enviado para fornecer detalhes sobre o investimento realizado, como valor investido e data.
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/c5838ece-b6d5-4df1-8d69-08589570b245)
+
+### 3. Realização de Saque
+
+Após a realização de um saque, um e-mail de confirmação é enviado para fornecer detalhes sobre o saque realizado, como valor sacado e data.
+
+
+![image](https://github.com/diovanBaptista/investment/assets/84948264/661bba51-3a64-4607-80dc-596d3f75afc5)
+
+
 
 
 ## Rotas do Investidor (Investor)
@@ -268,9 +317,9 @@ Endpoint: /investment/investment/
 
 Criar Novo Investimento
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/ca839f11-b6af-4b01-a05a-2fa36bac5dc4)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/2ab7b2a4-d78d-4e38-bd4d-016603abaaec)
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/7371ef4a-7e57-44c3-9651-7a480561fe25)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/4fa67726-6576-439e-bf52-ae6046eeee05)
 
 
 Endpoint: /investment/investment/
@@ -318,9 +367,9 @@ Endpoint: /investment/investment/{id}/
 
 Atualização Parcial do Investimento
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/5388485d-9c55-4756-af3d-b462e50ba429)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/f56dd682-7c5a-44c1-87f8-e65e5030a4cc)
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/b125be6d-98c4-42e9-9b00-9bc38cd7ec43)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/81128f4b-62ca-4a71-9b79-9244bcf5ac64)
 
 
 Endpoint: /investment/investment/{id}/
@@ -391,10 +440,10 @@ Endpoint: /withdraw/withdraw/
 
 Criar Novo Saque
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/6a6fe6f1-b059-4246-bb18-0aac055fd27c)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/86f4472a-af1f-4163-9091-5144daeaa6f3)
 
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/3eb24e3c-bf2e-4ed2-ac21-090748e02a82)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/b5cfeae7-a5bf-4bd8-9f26-50b7cfbcf74a)
 
 
 Endpoint: /withdraw/withdraw/
@@ -427,9 +476,8 @@ Endpoint: /withdraw/withdraw/{id}/
 
 Atualizar Saque
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/4f9c15ca-eb04-4212-a689-ba2bee568fd9)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/6fb16c1e-c223-4971-868c-37e2962e9f2c)
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/51f3e7f4-ee20-4de2-97dd-4702de3478be)
 
 
 Endpoint: /withdraw/withdraw/{id}/
@@ -440,9 +488,9 @@ Endpoint: /withdraw/withdraw/{id}/
 
 Atualização Parcial do Saque
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/ebefbdd3-4003-47f7-a3de-d2606154ce04)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/ea902657-dcad-462f-9b72-864ecb9dfbd8)
 
-![image](https://github.com/diovanBaptista/investment/assets/84948264/042d0825-469b-4571-b854-d6e6fe70277e)
+![image](https://github.com/diovanBaptista/investment/assets/84948264/14e3ae3a-6691-4945-acd3-58a758f96376)
 
 
 Endpoint: /withdraw/withdraw/{id}/
