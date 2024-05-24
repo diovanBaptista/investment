@@ -8,8 +8,8 @@ class Withdraw(models.Model):
         Investiment,
         verbose_name='Investmento',
         on_delete=models.DO_NOTHING,
-        null=False,
-        blank=False
+        null=True,
+        blank=True
     )
 
     value = models.DecimalField(

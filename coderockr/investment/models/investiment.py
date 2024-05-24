@@ -54,14 +54,7 @@ class Investiment(models.Model):
         for _ in range(months_passed):
             saldo += saldo * 0.52
 
-        # if self.investment_withdrawal:
-        #     withdraw = Withdraw.objects.get(id=self.id)
-            # saldo = withdraw.valor_final - float(self.value)
-
         return round(saldo,2)
-
-        
-
     
 
     def __str__(self):

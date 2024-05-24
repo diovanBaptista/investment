@@ -1,10 +1,12 @@
 from rest_framework import filters, viewsets
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from ..models import Withdraw, Investiment
 from ..serializers import WithdrawSerializer
 from django.http import JsonResponse
+from rest_framework.response import Response
 from datetime import datetime
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 class PaginacaoWithdraw(PageNumberPagination):
     page_size = 10
@@ -12,18 +14,17 @@ class PaginacaoWithdraw(PageNumberPagination):
     max_page_size = 1000
 
 class WithdrawViewSet(viewsets.ModelViewSet):
-    pagination_class = (PaginacaoWithdraw)
+    pagination_class = PaginacaoWithdraw
     queryset = Withdraw.objects.all()
     serializer_class = WithdrawSerializer
     permission_classes = []
-
     filter_backends = [filters.SearchFilter]
+    search_fields = []
 
-    search_fields = [
-        
-    ]
-
-
+    @swagger_auto_schema(
+        operation_description="Cria um novo saque.",
+        responses={200: WithdrawSerializer()},
+    )
     def create(self, request, *args, **kwargs):
         investiment = request.data.get('investment',None)
         value = request.data.get('value',None)
@@ -43,7 +44,6 @@ class WithdrawViewSet(viewsets.ModelViewSet):
         if investiment.investment_withdrawal:
             return JsonResponse({"Error": 'Esse investimento ja foi retirado'})
 
-
         if withdraw_full_amount:
             value = investiment.saldo
 
@@ -58,6 +58,10 @@ class WithdrawViewSet(viewsets.ModelViewSet):
 
         return super().create(request, *args, **kwargs)
     
+    @swagger_auto_schema(
+        operation_description="Atualiza um saque existente.",
+        responses={200: WithdrawSerializer()},
+    )
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         investiment = request.data.get('investment', instance.investment.id)
@@ -97,9 +101,16 @@ class WithdrawViewSet(viewsets.ModelViewSet):
         investment.investment_withdrawal = True
         investment.balance = saldo
         investment.save()
-
-        return super().update(request, *args, **kwargs)
+        super().update(request, *args, **kwargs)
+        instance.refresh_from_db()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
     
+    
+    @swagger_auto_schema(
+        operation_description="Exclui um saque.",
+        responses={204: "No content"},
+    )
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         investiment = Investiment.objects.get(id=instance.investment.id)
@@ -121,3 +132,67 @@ class WithdrawViewSet(viewsets.ModelViewSet):
         investiment.balance = round(saldo,2)
         investiment.save()
         return super().destroy(request, *args, **kwargs)
+
+
+    @swagger_auto_schema(
+        operation_description="Retorna uma lista de todos os saques cadastrados.",
+        responses={200: WithdrawSerializer(many=True)},
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Retorna um saque pelo ID.",
+        responses={200: WithdrawSerializer()},
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Atualiza parcialmente um saque pelo ID (PATCH).",
+        responses={200: WithdrawSerializer()},
+    )
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        investiment = request.data.get('investment', instance.investment.id)
+        value = request.data.get('value',None)
+        withdrawal_date = request.data.get('withdrawal_date',instance.withdrawal_date)
+        withdraw_full_amount = request.data.get('withdraw_full_amount',instance.withdraw_full_amount)
+        withdrawal_date = datetime.strptime(withdrawal_date, '%Y-%m-%d')
+        current_date = datetime.now()
+
+        try:
+            investiment = Investiment.objects.get(id=investiment)
+        except:
+            return JsonResponse({"Error": 'Investimento não encontrado, passe um investimento valido'})
+        
+        investment_date = str(investiment.creation_date)
+        investment_date = datetime.strptime(investment_date, '%Y-%m-%d')
+
+        if withdraw_full_amount:
+            value = investiment.saldo
+
+        if float(value) < float(investiment.saldo):
+            return JsonResponse({"Error": 'Não se pode fazer saque Parcial'})
+        
+        if withdrawal_date < investment_date:
+            return JsonResponse({"Error": 'Não se pode fazer saque antes da data de criação do Investimento'})
+        
+        if withdrawal_date > current_date:
+            return JsonResponse({"Error": 'Não se pode fazer saque em datas futuras'})
+        
+        instance.value = instance.investment.saldo
+        instance.save()
+
+        investment = Investiment.objects.get(id=instance.investment.id)
+
+        saldo = instance.valor_final - float(investment.value)
+
+        investment.investment_withdrawal = True
+        investment.balance = saldo
+        investment.save()
+        super().partial_update(request, *args, **kwargs)
+        instance.refresh_from_db()
+        # Serializa o objeto atualizado
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
