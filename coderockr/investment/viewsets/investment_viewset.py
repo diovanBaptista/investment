@@ -61,7 +61,7 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @swagger_auto_schema(
-        ooperation_description="Esta operação permite criar um novo investimento fornecendo informações como o valor do investimento, a data de criação, o status de retirada de investimento e o proprietário associado. Ao criar o investimento, o saldo é automaticamente calculado com base na data de criação do investimento e nos juros compostos de 0,52% ao mês até o mês atual. As seguintes validações são aplicadas: O valor do investimento não pode ser negativo ou igual a zero. A data de criação não pode ser uma data futura.",
+        operation_description="Esta operação permite criar um novo investimento fornecendo informações como o valor do investimento, a data de criação, o status de retirada de investimento e o proprietário associado. Ao criar o investimento, o saldo é automaticamente calculado com base na data de criação do investimento e nos juros compostos de 0,52% ao mês até o mês atual. As seguintes validações são aplicadas: O valor do investimento não pode ser negativo ou igual a zero. A data de criação não pode ser uma data futura.",
         responses={200: 'Success'},
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
@@ -70,7 +70,7 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
                 'creation_date': openapi.Schema(type=openapi.TYPE_STRING, format='date', description='Data de criação do investimento (formato: YYYY-MM-DD)'),
                 'owner': openapi.Schema(type=openapi.TYPE_INTEGER, description='ID do proprietário do investimento'),
             },
-            required=['value', 'creation_date', 'investment_withdrawal', 'owner']
+            required=['value', 'creation_date', 'owner']
         )
     )
     def create(self, request, *args, **kwargs):
