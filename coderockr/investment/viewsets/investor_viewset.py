@@ -4,18 +4,13 @@ from ..models import Investor
 from ..serializers import InvestorSerializer
 from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 
 class InvestorViewSet(viewsets.ModelViewSet):
     queryset = Investor.objects.all()
     serializer_class = InvestorSerializer
     permission_classes = []
-
     filter_backends = [filters.SearchFilter]
-
-    search_fields = [
-        
-    ]
+    search_fields = []
 
     @swagger_auto_schema(operation_description="Cria um novo investidor")
     def create(self, request, *args, **kwargs):

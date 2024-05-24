@@ -8,7 +8,6 @@ from django.core.mail import EmailMultiAlternatives
 
 @receiver(post_save, sender=Investor)
 def send_email_investor(sender, instance, created, **kwargs):
-    '''Envia um e-mail de boas-vindas após a criação de um novo Investor.'''
     if created:
         dono = settings.EMAIL_HOST_USER
         recipient = instance.user.email

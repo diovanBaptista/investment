@@ -9,7 +9,6 @@ from django.core.mail import EmailMultiAlternatives
 
 @receiver(post_save, sender=Investiment)
 def investment_post_save(sender, instance, created, **kwargs):
-    '''Realiza ações após a model Investimentation ser salva.'''
     if created:
         value = instance.value 
         date = instance.creation_date

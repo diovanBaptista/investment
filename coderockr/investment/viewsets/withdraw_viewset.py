@@ -6,7 +6,6 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from datetime import datetime
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 
 class PaginacaoWithdraw(PageNumberPagination):
     page_size = 10
@@ -193,6 +192,5 @@ class WithdrawViewSet(viewsets.ModelViewSet):
         investment.save()
         super().partial_update(request, *args, **kwargs)
         instance.refresh_from_db()
-        # Serializa o objeto atualizado
         serializer = self.get_serializer(instance)
         return Response(serializer.data)

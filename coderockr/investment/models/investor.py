@@ -18,11 +18,6 @@ class Investor(models.Model):
         max_length=16,
     )
 
-    # email = models.EmailField(
-    #     verbose_name="Email",
-    # )
-
-
     @property
     def data_criacao(self):
         return self.user.date_joined if self.user else None
@@ -30,12 +25,9 @@ class Investor(models.Model):
    
 
     def __str__(self):
-        '''Método que retorna a representação do objeto como string.'''
         return self.name
 
     class Meta:
-        '''Sub classe para definir meta atributos da classe principal.'''
-
         app_label = 'investment'
         verbose_name = 'investor'
         verbose_name_plural = 'investor'

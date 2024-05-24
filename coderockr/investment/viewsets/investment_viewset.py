@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from rest_framework import filters, viewsets
-from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
 from ..models import Investiment
 from ..serializers import InvestimentSerializer
@@ -92,11 +91,8 @@ class InvestimentationViewSet(viewsets.ModelViewSet):
 
         instance.balance = round(saldo,2)
         instance.save()
-        
-        # Chama o método de atualização padrão para efetuar a atualização
         super().partial_update(request, *args, **kwargs)
         instance.refresh_from_db()
-        # Serializa o objeto atualizado
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
     

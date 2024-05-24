@@ -17,14 +17,6 @@ class InvestimentAdmin(admin.ModelAdmin):
         
     ]
 
-    # list_filter = [
-    #     'campos_fk_e_booleanos
-    # ]
-
-    # list_select_related = [
-    #     'campos_dos_campos_fk
-    # ]
-
     autocomplete_fields = [
         'owner'
     ]

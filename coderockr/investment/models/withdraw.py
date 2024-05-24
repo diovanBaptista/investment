@@ -22,7 +22,6 @@ class Withdraw(models.Model):
 
     withdrawal_date = models.DateField(
         verbose_name='Data do Saque',
-        # auto_now_add=True
     )
 
     withdraw_full_amount = models.BooleanField(
@@ -58,12 +57,9 @@ class Withdraw(models.Model):
 
 
     def __str__(self):
-        '''Método que retorna a representação do objeto como string.'''
         return f"Saque do investimento {self.investment}"
 
     class Meta:
-        '''Sub classe para definir meta atributos da classe principal.'''
-
         app_label = 'investment'
         verbose_name = 'withdraw'
         verbose_name_plural = 'withdraw'

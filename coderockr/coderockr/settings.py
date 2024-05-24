@@ -60,7 +60,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'coderockr.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -114,11 +113,10 @@ REST_FRAMEWORK = {
     )
 }
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Host do seu servidor de e-mail
-EMAIL_PORT = 587  # Porta do servidor de e-mail (normalmente 587 para TLS)
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_PORT = 587  
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'investmentcoode@gmail.com'  # Seu endereço de e-mail
+EMAIL_HOST_USER = 'investmentcoode@gmail.com'  
 EMAIL_HOST_PASSWORD = 'nhskflyzrnjvzdoi' 
 EMAIL_USE_SSL = False

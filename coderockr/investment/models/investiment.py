@@ -12,7 +12,6 @@ class Investiment(models.Model):
 
     creation_date = models.DateField(
         verbose_name='Data de criação',
-        # auto_now_add=True
     )
 
     value = models.DecimalField(
@@ -20,7 +19,6 @@ class Investiment(models.Model):
         max_digits=10,
         decimal_places=2
     )
-
 
     investment_withdrawal = models.BooleanField(
         verbose_name='Saque do investimento',
@@ -58,12 +56,9 @@ class Investiment(models.Model):
     
 
     def __str__(self):
-        '''Método que retorna a representação do objeto como string.'''
         return f"{self.owner} - {self.saldo}"
 
     class Meta:
-        '''Sub classe para definir meta atributos da classe principal.'''
-
         app_label = 'investment'
         verbose_name = 'Investment'
         verbose_name_plural = 'Investmentes'
