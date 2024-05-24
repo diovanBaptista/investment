@@ -2,7 +2,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 from ..models import Investiment
-
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.core.mail import EmailMultiAlternatives
 
 @receiver(post_save, sender=Investiment)
 def investment_post_save(sender, instance, created, **kwargs):
@@ -27,3 +30,19 @@ def investment_post_save(sender, instance, created, **kwargs):
 
         instance.balance = round(saldo,2)
         instance.save()
+
+
+        dono = settings.EMAIL_HOST_USER
+        recipient = instance.owner.user.email
+        subject = 'Investimento "Investment Coderockr" foi Criado com Sucesso'
+        html_message = render_to_string('email_investment_create .html', {'instance': instance})
+        plain_message = strip_tags(html_message)
+        
+        email = EmailMultiAlternatives(subject, plain_message, dono, [recipient])
+        email.attach_alternative(html_message, "text/html")
+        
+        try:
+            email.send()
+        except Exception as e:
+            print(f"Falha ao enviar e-mail de boas-vindas: {e}")
+

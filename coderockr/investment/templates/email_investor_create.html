@@ -1,0 +1,407 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+    
+    <script src="https://kit.fontawesome.com/a0808fc22f.js" crossorigin="anonymous"></script>
+    <title></title>
+    <style>
+        /* A simple css reset */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        table,
+        thead,
+        tbody,
+        tr,
+        td,
+        img {
+            padding: 0;
+            margin: 0;
+            border: none;
+            border-spacing: 0px;
+            border-collapse: collapse;
+            vertical-align: top;
+        }
+
+
+
+        /* Add some padding for small screens */
+
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0;
+            padding: 0;
+            padding-bottom: 16px;
+            line-height: 1.3;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        p,
+        a,
+        li {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        #secaologo {
+
+            padding: 1.5rem 4rem;
+        }
+
+        #logo {
+            /* max-width: 250px; */
+            margin: 0 auto;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+
+        @media (max-width: 767px) {
+
+            
+            #primeiro {
+                width: 100%;
+
+            }
+
+            #secaologo {
+                max-width: 80%;
+                margin: 0 auto;
+                padding: 1.375rem 2rem;
+            }
+
+            #logo {
+                /* max-width: 200px; */
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+
+            .wrapper {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .wrapper .section {
+                width: 100%;
+            }
+
+            .wrapper .column {
+                width: 100%;
+                display: block;
+            }
+        }
+
+
+
+
+        /* CSS Custom */
+
+        /* --- Type text --- */
+        .title-email{
+            margin: 0 !important;
+            padding: 0 !important;
+
+            font-size: clamp(1.2rem, 3vw, 1.5rem) !important;
+            font-family: 'Space Grotesk', sans-serif !important;
+
+            padding: 0 !important;
+
+        }
+
+        .title-card-v1{
+            margin: 0 !important;
+            padding: 0 !important;
+
+            font-size: 1.25rem !important;
+            font-family: 'Space Grotesk', sans-serif !important;
+
+            padding: 0 .5rem !important;
+        }
+
+        .p-normal-v1{
+            margin: 0 !important;
+            padding: 0 !important;
+
+            font-size: clamp(.875rem, 3vw, 1rem) !important;
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-weight: 400 !important;
+
+            padding: 0 !important;
+        }
+
+        .p-normal-v2{
+            margin: 0 !important;
+            padding: 0 !important;
+
+            font-size: .875rem !important;
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-weight: 500 !important;
+
+            padding: 0 .5rem !important;
+        }
+
+        .p-sub-normal-v1{
+            margin: 0 !important;
+            padding: 0 !important;
+
+            font-size: .75rem !important;
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-weight: 500 !important;
+
+            padding: 0 .5rem !important;
+        }
+
+
+        /* --- Color --- */
+        .color-1{
+            color: #090A1A !important;
+        }
+        .color-2{
+            color: #5C5D5E !important;
+            background: rgba(62, 115, 221, 0.1) !important;
+            padding: 8px !important;
+            margin-top: 1rem !important;
+        }
+        .color-3{
+            color: #000000 !important;
+        }
+        .color-4{
+            color: #ffffffff !important;
+        }
+        .color-5{
+            color: #7c7c7c !important;
+        }
+
+
+        /* --- Link Style --- */
+
+        
+        .container-link{
+            width: 15.625rem !important;
+            height: 3rem !important;
+        }
+
+
+        .link-1{
+            
+            display: inline-block !important;
+
+            margin: 0 !important;
+            padding: 0 !important;
+
+            text-decoration: none !important;
+            font-weight: 500 !important;
+            font-size: .875rem !important;
+
+            color: #000000 !important;
+            
+            font-family: 'Space Grotesk', sans-serif !important;
+
+
+            padding: .5rem .75rem !important;
+            text-align: center !important;
+        }
+
+        .link-2{
+            display: inline-block !important;
+            
+            margin: 0 !important;
+            padding: 0 !important;
+
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            font-size: clamp(.875rem, 3vw, 1rem) !important;
+            line-height: 1.5rem !important;
+
+            /* identical to box height, or 150% */
+            letter-spacing: -0.02em !important;
+            text-decoration-line: underline !important;
+
+            /* Ds Neutral/L/100 */
+            color: #090A1A !important;
+        }
+
+
+
+
+        @media only screen and (max-width: 480px){
+            /*.title-email{
+                font-size: 1.625rem !important;
+            }*/
+
+            .title-card-v1{
+                font-size: 1.25rem !important;
+            }
+
+            /*.p-normal-v1{
+                font-size: .75rem !important;
+            }*/
+
+            .p-normal-v2{
+                font-size: .75rem !important;
+            }
+
+            .p-sub-normal-v1{
+                font-size: .7rem !important;
+            }
+
+
+            .container-link{
+                width: 14rem !important;
+                height: 4rem !important;
+            }
+            .link-1{
+                font-size: .75rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f5f6fa; 
+    font-family: 'Poppins', sans-serif !important;" id="primeiro">
+        <tbody>
+            <tr>
+                <td class="wrapper" align="center">
+                    <!-- Header Image -->
+                    <table style="background-color: #F5F6FA; background-image: url(''); background-repeat: no-repeat; background-size: 100% 100%;" class="section header" border="0" cellpadding="0" cellspacing="0" width="600">
+                        
+                        <tr>
+                            <td align="center" class="column" style="padding: 4em 0; box-sizing: border-box;">
+
+                               
+                                <table style="width: 85%; max-width: 480px;" border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center" style="box-sizing: border-box; border-radius: 10px;">
+                                                
+                                                <!-- Cabeçalho -->
+                                                <table style="width: 100%; background: linear-gradient(92.74deg, var(--primary-dark) 0%, var(primary-pure) 100%); border-radius: .5rem .5rem 0 0;" border="0" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left" style="padding: 2rem;">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!-- Fim Cabeçalho -->
+
+                                                <!-- Content Email -->
+                                                <table style="width: 100%; min-height: 26rem;" border="0" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left" style="padding: 2rem; background-color: #ffffff;">
+
+                                                                <h1
+                                                                  class="title-email color-1"
+                                                                  style="line-height: 1.875rem !important; font-weight: 500 !important; display: flex; align-items: center !important; gap:4px"
+                                                                >  
+                                                                   <span> Bem-vindo ao Investment Coderockr</span>
+                                                                </h1>
+
+                                                                <div
+                                                                  class="p-normal-v1 color-2"
+                                                                  style=" text-align: start !important; "
+                                                                >
+                                                                Bem-vindo(a) {{instance.name}}!<br><br><br><br><br>
+
+
+
+                                                                
+                                                                Estamos muito felizes em recebê-lo no Investment Coderockr!<br><br><br><br>
+
+                                                                Nossa missão é ajudá-lo a alcançar seus objetivos financeiros, oferecendo as melhores oportunidades de investimento e suporte contínuo. Aqui no Investment Coderockr, valorizamos a transparência, a inovação e a confiança. Nosso time está dedicado a proporcionar a você uma experiência única e enriquecedora.
+                                                                Acesse sua conta e explore todas as funcionalidades que disponibilizamos para você. Fique à vontade para entrar em contato conosco para qualquer dúvida ou suporte que precisar.
+                                                                Novamente, seja muito bem-vindo ao Investment Coderockr. Estamos ansiosos para ver você prosperar com seus investimentos.
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!-- End Content Email -->
+
+
+                                                <!-- Footer Email -->
+
+                                                <table style="width: 100%;" border="0" cellpadding="0" cellspacing="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="center" style="padding: 2rem; background: #F5F6FA; border-radius: 0 0 10px 10px; box-shadow: 2px 8px 32px rgba(0, 0, 0, 0.04) !important;">
+                                                                <table style="width: 100%;" border="0" cellpadding="0" cellspacing="0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td align="left" style="box-sizing: border-box; width: 50%;   ">
+                                                                                <a
+                                                                                  href="{{site.dominio_oficial}}"
+                                                                                  class="link-2"
+                                                                                  title="{{site.titulo_global|upper}}"
+                                                                                  url-title="{{site.titulo_global|upper}}"
+                                                                                  ses:tags="linkName:{{site.titulo_global|upper}}"
+                                                                                  linkesp="1"
+                                                                                  skip-validate=""
+                                                                                  >
+                                                                                    {{site.dominio_oficial}}
+                                                                                </a>
+                                                                            </td>
+                
+                                                                            <td align="right" style="box-sizing: border-box; width: 50%; ">
+                                                                                <a
+                                                                                  href="https://novadata.com.br/"
+                                                                                  style="display: inline-block !important;"
+                                                                                  title="STRYN"
+                                                                                  url-title="STRYN"
+                                                                                  ses:tags="linkName:STRYN"
+                                                                                  linkesp="1"
+                                                                                  skip-validate=""
+                                                                                >
+                                                                                    
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!-- End Footer Email -->
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
